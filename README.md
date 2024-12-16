@@ -1,5 +1,16 @@
 # iit-indoor-2024
 
+To run
+```
+// cd backend
+python manage.py runserver
+
+// cd frontend
+npm run start
+
+```
+### # self notes
+
 # Django Development Period BD problem
 I sometimes need to cancel all previous migrations
 Mthod 1. ( keep the db )

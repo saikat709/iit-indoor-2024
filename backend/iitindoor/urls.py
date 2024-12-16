@@ -11,9 +11,9 @@ admin.site.index_title = "Welcome to IIT Indoor admin panel"
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name = "admin" ),
     path(r'', home, name = "home" ),
     path(r'<slug:url_suffix>', home, name = "home" ),  # match everything
+    path('admin/', admin.site.urls, name = "admin" ),
     path('api/', include("api.urls") ),
 ]
 

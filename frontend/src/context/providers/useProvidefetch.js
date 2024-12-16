@@ -1,6 +1,5 @@
-import Register from "../../pages/Register";
-
-const BASE_URL = "http://127.0.0.1:8000/api/";
+const BASE_URL = "https://iitindoor.pythonanywhere.com/api/";
+// const BASE_URL = "http://127.0.0.1:8000/api/"
 
 const GAME_API_URL = BASE_URL + "game/";
 const PLAYER_API_URL = BASE_URL + "player/";

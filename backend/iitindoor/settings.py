@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'saikat-secured-g(d93)ee#n_!2+8*510z@oq+7p4ypu^409suk@&rs8*ahmuj^f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get( "DEBUG", False )
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,7 +26,6 @@ INSTALLED_APPS = [
     'games',
     'registration',
     'api',
-
 ]
 
 MIDDLEWARE = [
@@ -40,7 +40,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -57,12 +56,13 @@ ALLOWED_HOSTS = [ '*' ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+
 CORS_ALLOWED_ORIGINS = [
+    "https://iitindoor.pythonanywhere.com",
     "http://localhost:3000",
     "http://localhost:8080",
     "http://127.0.0.1:9000",
 ]
-
 
 # CORS_ALLOWED_ORIGIN_REGEXES = [
 #     r"^https://\w+\.example\.com$",
