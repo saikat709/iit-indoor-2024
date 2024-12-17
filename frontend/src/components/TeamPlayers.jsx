@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Player( { onPlayerAdd } ){
 
@@ -22,15 +22,19 @@ function Player( { onPlayerAdd } ){
         );
     });
 
+    useEffect( ()=>{
+        console.log(batch);
+    });
+
     return (<>
         <form className="flex flex-col gap-2 w-full"
             onSubmit={ (e)=> {
-                    e.preventDefault();
-                    onPlayerAdd( { name, email, batch } );
-                    setName("");
-                    setBatch("");
-                    setEmail("");
-                }}
+                e.preventDefault();
+                onPlayerAdd( { name, email, batch } );
+                setName("");
+                setBatch("");
+                setEmail("");
+            }}
             >
             <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -53,13 +57,13 @@ function Player( { onPlayerAdd } ){
             
             <select required 
                     className="select select-bordered w-full max-w-xs" 
-                    defaultValue={batch}
-                    onChange={e=>{
+                    value={ batch == "" ? "notselected" : batch }
+                    onChange={ e => {
                         setBatch(e.target.value);
                     }}
                     >
-                <option disabled value={""} readOnly={ true }> Select batch </option>
-                { batchOptions }
+                <option disabled value={"notselected"}> Select batch </option>
+                    { batchOptions }
             </select>
 
             <label className="input input-bordered flex items-center gap-2">

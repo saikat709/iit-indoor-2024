@@ -63,7 +63,8 @@ class Game( models.Model ):
 
 class Team(models.Model):
     name = models.CharField( max_length = 50 )
-    team_email = models.CharField( max_length = 50 )
+    number = models.CharField( max_length = 50 )
+    payment_method = models.CharField(max_length=50, default="offline")
     game = models.ForeignKey( "games.Game", on_delete = models.CASCADE, related_name="teams" )
     # players = models.OneToOneField( "userauth.Player", on_delete=models.CASCADE, related_name="team", null=True )
     

@@ -19,18 +19,22 @@ from .forms import CombinedRegistrationForm
 class GameApiView(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+    pagination_class = None
 
 class TeamApiView(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    pagination_class = None
 
 class TeamRegistrationViewSet(viewsets.ModelViewSet):
     serializer_class = TeamRegistrationSerializer
     queryset = TeamRegistration.objects.all()
+    pagination_class = None
 
 class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
     queryset = Player.objects.all()
+    pagination_class = None
 
 
 @api_view(['POST'])
@@ -56,7 +60,8 @@ def registration_combined(request, *args, **kwargs):
         print( request.data )
 
         name = request.data.get( "name" )
-        email =  request.data.get( "email" )
+        number =  request.data.get( "number" )
+        payment_method =  request.data.get( "payment_method" )
         transaction_id = request.data.get("transaction_id" )
         game_id = players = request.data.get( "game_id" ) or 1
 
@@ -66,8 +71,8 @@ def registration_combined(request, *args, **kwargs):
 
         try:
             game = Game.objects.filter( id = game_id ).first()
-            team = Team( name = name, team_email = email, game = game )
-            team.save();
+            team = Team( name = name, number = number, game = game, payment_method = payment_method )
+            team.save()
 
             for p in players:
                 player = Player( name = p.get("name"), email = p.get("email"), batch = p.get("batch"), game = game, team = team )

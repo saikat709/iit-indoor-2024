@@ -138,11 +138,11 @@ export default function NotifyTeamMembers({ games } ){
                         <button className="btn" disabled={isLoading}>Close</button>
                     </form>
                     <button className='btn btn-primary'
-                        disabled={ isForGame ? (selectedGame.id === undefined || !message) : !message  }
+                        disabled={ true } // isForGame ? (selectedGame.id === undefined || !message) : !message  }
                         onClick={ ()=> {
                             notifyRegisteredMembers();
                         } }
-                    >{ isLoading ? <Loader/> : "Send" }</button>
+                    >{ isLoading ? <Loader/> : "Disabled Intentionally" }</button>
                 </div>
             </div>
         </dialog>

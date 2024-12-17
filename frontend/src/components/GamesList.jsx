@@ -15,7 +15,7 @@ export default function GamesList(){
         .then(response => response.json())
         .then( data => {
             setIsLoading(false);
-            setGames( data.results );
+            setGames( data );
         })
         .catch((err) => {
             setIsLoading( false );
@@ -46,22 +46,32 @@ export default function GamesList(){
                     <p className="text-yellow-700 italic text-sm font-extralight font-mono">  { el.description } </p>
                     <div className="text-gray-500 bg-slate-400 w-2/4 h-px"></div>
                     <p className='flex gap-1'>
-                        <span>Entry free: </span>
-                        <span className="font-bold text-green-500"> { el.entry_fee } </span>
-                        <span className="w-6 h-6 text-gray-300"> BDT </span>
+                        { el.entry_fee > 0 ?
+                            <>
+                                <span>Entry free: </span>
+                                <span className="font-bold text-green-500"> { el.entry_fee } </span>
+                                <span className="w-6 h-6 text-gray-300"> BDT </span>
+                            </> :
+                            <>
+                                <span className="text-green-600 font-bold">Free registration</span>
+                            </>
+                        }
                     </p>
                     <p className="text-white font-bold">
-                        Teams: <span className="text-success">{ verified_teams.length  }</span> out of { el.total_team } 
+                        Registrations: <span className="text-success">{ verified_teams.length  }</span>
                     </p>
                     {/* || <h1 className="text-sm text-error">teams attr not found</h1> */}
                     <div className="text-gray-500 bg-slate-400 w-2/4 h-px"></div>
                     <div className="card-actions justify-end">
-                       { verified_teams.length < el.total_team 
+                       {/* { verified_teams.length < el.total_team 
                             ? <Link to={`/register/${el.id}`} 
                                     className="btn btn-outline hover:bg-blue-700 hover:border-none hover:text-white"
                                 > Register </Link>
                             : <button className="btn btn-success mt-2 px-5 btn-sm">Teams complete.</button>
-                       }
+                       } */}
+                       <Link to={`/register/${el.id}`} 
+                            className="btn btn-primary hover:bg-blue-700 hover:border-none hover:text-white"
+                        > Register </Link>
                     </div>
                 </div>
             </div>
@@ -71,7 +81,7 @@ export default function GamesList(){
     return (<>
         { isLoading ? <div className="flex justify-center mt-4"> <Loader/> </div>
         :  error !== "" ? <h1 className="text-error font-mono font-bio"> {error} </h1>
-            : <div className="flex justify-center items-center flex-wrap m-1 md:m-6 p-1 md:p-2 mt-6 md:mt-10">
+            : <div className="flex justify-center items-center flex-wrap m-1 md:m-6 p-1 md:p-2 mt-6 md:mt-10 mb-5">
                 { gamesComp }
             </div>
         }

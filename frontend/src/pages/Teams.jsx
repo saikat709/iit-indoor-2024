@@ -15,10 +15,10 @@ function TeamCard({team, showStatus = false}){
         >
             <div className="card-body relative items-center text-center">
                 { showStatus && <h1 className={ "absolute right-0 top-0 rounded-full text-sm px-2 py-1 text-black " + 
-                                ( team.status === 'accepted' ? " bg-success" : ( team.status === 'pending' ? " bg-warning" : " bg-error") ) }
-                                > {team.status || "unspecified" } </h1> }
+                    ( team.status === 'accepted' ? " bg-success" : ( team.status === 'pending' ? " bg-warning" : " bg-error") ) }
+                    > {team.status || "unspecified" } </h1> }
                 <h2 className="card-title text-success"> { team.name } </h2>
-                <h3 className="font-mono">{ team.team_email }</h3>
+                {/* <h3 className="font-mono">{ team.number }</h3> */}
                 <hr className="w-3/4"/>
                 { players }
                 <button className="bg-amber-300/90 relative mt-4 px-10 py-1 font-mono text-md md:text-lg text-black rounded-3xl"> 
@@ -44,11 +44,11 @@ export default function Teams(){
         api.getTeams()
         .then( res => res.json() )
         .then( data => {
-            setAllTeams(data.results);
-            // console.log(data.results);
+            setAllTeams(data);
+            // console.log(data);
             // console.log(myTeam.split(","));
             if ( myTeam ){
-                setMyRecentTeams(data.results.filter( team => {
+                setMyRecentTeams(data.filter( team => {
                     // console.log(team.id);
                     return myTeam.split(',').includes( team.id + '' );
                 }));
@@ -62,7 +62,6 @@ export default function Teams(){
     }, []);
 
     // console.log(myRecentTeams);
-
 
     const teams = allTeams && allTeams.map( t =>  t.status === 'accepted' ? <TeamCard key={t.id} team={t}/> : null );
 
@@ -82,12 +81,14 @@ export default function Teams(){
              ? <div className="flex justify-center items-center w-full">
                     <Loader/>
                 </div>
-             : <div className="flex flex-col md:w-full text-xl md:text-2xl gap-1">
-                    <h1 className="text-white font-bold"> All Accepted Teams -  </h1>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-center w-full mx-auto">
-                        { allTeams.length > 0 && teams }
+             : ( allTeams && allTeams.filter(e=>e.status=='accepted').length > 0 )
+                ? <div className="flex flex-col md:w-full text-xl md:text-2xl gap-1">
+                        <h1 className="text-white font-bold"> All Accepted Teams - ({ allTeams.filter(e=>e.status=='accepted').length}) </h1>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-center w-full mx-auto">
+                            { allTeams.filter(e=>e.status=='accepted').length > 0 && teams }
+                        </div>
                     </div>
-                </div>
+                : <h1 className="text-lg text-white"> No Accepted Teams Found for now. </h1>
             }
         </div>
     );

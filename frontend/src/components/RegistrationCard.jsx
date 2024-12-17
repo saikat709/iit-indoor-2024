@@ -13,17 +13,17 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
     const [ error, setError ] = useState("");
 
     const sendNotificationMail = ()=>{
-        setIsDeclining(true);
-        api.sendMail( declineMsg, reg.team.team_email, "Team registration" )
-        .then( res => {
-            setIsDeclining(false);
-            toast("Declined successfully.")
-            onAcceptOrRemove();
-        })
-        .catch( err => {
-            toast(err);
-            setIsDeclining(false);
-        });
+        // setIsDeclining(true);
+        // api.sendMail( declineMsg, reg.team.team_email, "Team registration" )
+        // .then( res => {
+        //     setIsDeclining(false);
+        //     toast("Declined successfully.")
+        //     onAcceptOrRemove();
+        // })
+        // .catch( err => {
+        //     toast(err);
+        //     setIsDeclining(false);
+        // });
     }
 
     const handleSubmitDecline = ()=> {
@@ -32,7 +32,9 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
         api.declineRegistration( reg.id, declineMsg )
         .then( res => {
             setIsDeclining(false);
-            if( res.ok ) sendNotificationMail();
+            toast("Declined successfully.")
+            onAcceptOrRemove();
+            // if( res.ok ) sendNotificationMail();
         })
         .catch( err => {
             toast(err);
@@ -45,23 +47,25 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
         api.acceptRegistration(reg.id)
         .then( res => {
             setIsAccepting(false);
-        })
-        .catch( err => {
-            setIsAccepting(false);
-            toast(err);
-        });
-        setIsAccepting(true);
-        const msg = "Thank you for perticipating in IITIndoor2024."
-        api.sendMail(msg, reg.team_email, "Payment clear")
-        .then( res =>{
-            setIsAccepting(false);
             toast("Accepted successfully.")
             onAcceptOrRemove();
         })
         .catch( err => {
             setIsAccepting(false);
-            alert(err);
-        })
+            toast(err);
+        });
+        // setIsAccepting(true);
+        // const msg = "Thank you for perticipating in IITIndoor2024."
+        // api.sendMail(msg, reg.team_email, "Payment clear")
+        // .then( res =>{
+        //     setIsAccepting(false);
+        //     toast("Accepted successfully.")
+        //     onAcceptOrRemove();
+        // })
+        // .catch( err => {
+        //     setIsAccepting(false);
+        //     alert(err);
+        // })
     }
 
 
@@ -91,11 +95,11 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
         <div className="card bg-neutral text-neutral-content mx-2">
             <div className="card-body items-center text-center">
                 <h2 className="card-title text-success">{reg.team.name}</h2>
-                <h3 className="card-title text-white text-sm">{reg.team.team_email}</h3>
-                { reg.transaction_id
-                    ? <p className="text-md text-pretty">Transaction Id : <span className="text-white font-mono font-bold text-lg"> { reg.transaction_id } </span> </p> 
-                    : <p className="text-warning px-2"> Willing to pay hand to hand </p>
-                }
+                <h3>{ reg.team.number }</h3>
+                <hr className="w-3/4"/>
+                <h3 className="text-sm"> Payment Method: <span className="text-amber-800 font-bold text-md">{ reg.team.payment_method.toUpperCase() }</span></h3>
+                { reg.transaction_id && <p className="text-md text-pretty">Transaction Id : <span className="text-white font-mono font-bold text-lg"> { reg.transaction_id } </span> </p> }
+                { (!reg.transaction_id && reg.team.payment_method.toUpperCase() !== "NOPAYMENT" ) &&  <p className="text-warning px-2"> Willing to pay hand to hand </p> }
                 <div className="card-actions justify-end">
                 <button className="btn btn-primary px-6"
                     onClick={ ()=>{  

@@ -14,7 +14,7 @@ export default function RegistrationLookUp(){
         api.getRegistrations()
         .then( res => res.json() )
         .then( data => {
-            setAllReg(data.results);
+            setAllReg(data);
             setIsLoading(false);
         })
         .catch( err => {

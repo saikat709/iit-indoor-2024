@@ -11,7 +11,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = [ 'players', 'status', 'name', 'team_email', 'game', 'id', 'registration', 'game_type', 'game_name', ] # '__all__'
+        fields = [ 'players', 'status', 'name', 'number', 'payment_method', 'game', 'id', 'registration', 'game_type', 'game_name', ] # '__all__'
         read_only_fields = ( 'status', 'game', 'players' )
         extra_kwargs = {
             'status': { 'read_only': True },

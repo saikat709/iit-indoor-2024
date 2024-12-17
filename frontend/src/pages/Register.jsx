@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamName from "../components/TeamName";
 import TeamPlayers from "../components/TeamPlayers";
-import TeamEmail from "../components/TeamEmail";
+import TeamNumber from "../components/TeamNumber";
 import Payment from "../components/Payment";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
@@ -33,9 +33,10 @@ export default function Register(){
         setFormData({
             name: "",
             players: [],
-            email: "",
+            number: "",
             transaction_id: "",
             game_id: params.id,
+            payment_method: "NoPayment",
         });
     }, []);
 
@@ -51,9 +52,10 @@ export default function Register(){
             setInfo({
                 playerCount: data.player_count,
                 gameName: data.name,
-                entryFee: data.entryFee,
+                entryFee: data.entry_fee,
                 gamePicture: data.picture,  
             });
+            console.log(data);
         })
         .catch( err => {
             setIsLoading(false);
@@ -98,7 +100,6 @@ export default function Register(){
     };
 
 
-
     const content = (
         <div className="card m-4 mt-16 md:mt-10 w- md:m-6 flex justify-center items-center bg-slate-100">
             <div className="flex justify-center">
@@ -109,8 +110,8 @@ export default function Register(){
                     alt={ info.gameName } />
                 </figure>
                 <div className="card-body flex-1 p-3 md:p-1 w-4/5 md:w-3/5 flex justify-start">
-                    <h2 className="card-title text-black">Register for: <span className="font-bold text-yellow-800"> { info.gameName } </span> </h2>
-                    <h2 className="card-title text-black">Entry fee: <span className="font-bold text-green-600"> { info.entryFee } </span> </h2>
+                    <h2 className="card-title text-black">Register for: <span className="font-bold text-yellow-800"> { info.gameName  } </span> </h2>
+                    <h2 className="card-title text-black">Entry fee: <span className="font-bold text-green-600"> { info.entryFee || 0 } BDT </span> </h2>
                     <hr/>
                     
                     <div className="flex flex-row gap-2 md:justify-start justify-center">
@@ -118,7 +119,7 @@ export default function Register(){
                             <li className={ "step "+ ( curStep>=1 ? "step-primary" : "" ) }></li>
                             <li className={ "step "+ ( curStep>=2 ? "step-primary" : "" ) }></li>
                             <li className={ "step "+ ( curStep>=3 ? "step-primary" : "" ) }></li>
-                            <li className={ "step "+ ( curStep>=4 ? "step-primary" : "" ) }></li>
+                            { info.entryFee > 0  && <li className={ "step "+ ( curStep>=4 ? "step-primary" : "" ) }></li>}
                         </ul>
 
                         <div className="py-2 flex flex-col gap-1 w-60 md:w-72">
@@ -140,7 +141,7 @@ export default function Register(){
                                 /> 
                             }
                             { curStep===2 && 
-                                <TeamName 
+                                <TeamName
                                     onNext={ (teamName)=>{
                                         setFormData( { ...formData, name: teamName } );
                                         setCurStep(3);
@@ -149,23 +150,22 @@ export default function Register(){
                                 /> 
                             }
                             { curStep===3 && 
-                                <TeamEmail 
+                                <TeamNumber
                                     emails={ formData.players.map( p => p.email ) } 
-                                    onNext={ (email)=>{ 
+                                    onNext={ (number)=>{ 
                                         // console.log(email);
-                                        setFormData( {...formData, email: email } );
-                                        setCurStep(4); 
+                                        setFormData( {...formData, number: number } );
+                                        info.entryFee > 0 ? setCurStep(4) : setCurStep(5); 
                                     } }
                                 /> 
                             }
-                            { curStep===4 && <Payment 
-                                    onNext={ (tranId)=>{ 
-                                        setFormData({...formData, transaction_id: tranId });
+                            { (curStep===4 && info.entryFee > 0)  && <Payment 
+                                    onNext={ ( payment_method, tranId )=>{ 
+                                        setFormData({...formData, transaction_id: tranId, payment_method: payment_method });
                                         setCurStep(5); 
                                     } }
                                     isLoading={ isLoading }
-
-                                    /> 
+                                /> 
                             }
                         </div>
                     </div>

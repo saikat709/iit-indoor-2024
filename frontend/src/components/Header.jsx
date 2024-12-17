@@ -10,7 +10,7 @@ export default function Header({ curPath }){
     const navClass = "btn btn-ghost btn-rounded hover:bg-blue-600 hover:bg-opacity-20 hover:text-black text-black";
 
     return (<>
-        <div className='flex justify-center bg-slate-100 shadow-gray-600 shadow-sm w-full '>
+        <div className='flex justify-center bg-amber-50 shadow-gray-600 shadow-sm w-full '>
             <div className="navbar flex justify-between px-6 md:w-4/5 md:px-0 md:ps-1 ">
                 <div className="relative">
                     <div className="dropdown md:hidden"> { /*  md:hidden */}
@@ -33,7 +33,7 @@ export default function Header({ curPath }){
                     { showNavOption && 
                         <ul
                             tabIndex={0}
-                            className="menu menu-lg absolute bg-slate-100 rounded-box z-[5] mt-3 w-52 p-2 shadow-lg text-black">
+                            className="menu menu-lg absolute bg-amber-50 rounded-box z-[5] mt-3 w-52 p-2 shadow-lg text-black">
                             <Link onClick={ e => { setShowNavOption(false) } }
                                 className={navClass + ( curPath==='/'      ? " bg-blue-800 text-white" : "" ) } to={"/"} > Home</Link>
                             <Link to={ "/teams" } 

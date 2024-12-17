@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import RegistrationCard from '../components/RegistrationCard';
 import useFetch from '../context/hooks/usefetch';
 import NotifyTeamMembers from '../components/NotifyTeamMembers';
 import RegistrationLookUp from '../components/RegistrationLookup';
 import Loader from '../components/Loader';
-
 
 
 function ModeratorContent(){
@@ -20,8 +18,8 @@ function ModeratorContent(){
         .then(response => response.json())
         .then( data => {
             setIsLoading(false);
-            setGames( data.results );
-            // console.log( data.results );
+            setGames( data );
+            // console.log( data );
         } )
         .catch((err) => {
             setIsLoading( false );
@@ -50,12 +48,12 @@ function ModeratorContent(){
             }
 
             { activeTab==1 && 
-            <div className="bg-base-100 border-base-300 rounded-box p-6">
-                <div className="flex md:flex-row justify-center md:mx-36 flex-col gap-1">
-                    <Link to={"/pdf"} state={ { fromLink: true } } className="btn btn-primary flex-1">Pdf Report</Link>
-                    { isLoading ?  <div className='flex justify-center'> <Loader/> </div> : <NotifyTeamMembers games={games} /> }
+                <div className="bg-base-100 border-base-300 rounded-box p-6">
+                    <div className="flex md:flex-row justify-center md:mx-36 flex-col gap-1">
+                        <Link to={"/pdf"} state={ { fromLink: true } } className="btn btn-primary flex-1">Pdf Report</Link>
+                        { isLoading ?  <div className='flex justify-center'> <Loader/> </div> : <NotifyTeamMembers games={games} /> }
+                    </div>
                 </div>
-             </div>
             }
 
             </div>

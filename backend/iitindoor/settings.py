@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'saikat-secured-g(d93)ee#n_!2+8*510z@oq+7p4ypu^409suk@&rs8*ahmuj^f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get( "DEBUG", False )
+DEBUG = os.environ.get( "DEBUG", True )
 
 # Application definition
 INSTALLED_APPS = [
@@ -120,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
+}
+
 
 # Internationalization
 
@@ -174,7 +179,5 @@ EMAIL_HOST_PASSWORD = IIT_MAIL_PASS_KEY
 DEFAULT_FROM_EMAIL = 'bsse1629@iit.du.ac.bd'
 
 
-
 # Default primary key field type
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

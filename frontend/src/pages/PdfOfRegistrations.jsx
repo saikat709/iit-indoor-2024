@@ -21,27 +21,27 @@ const styles = StyleSheet.create({
   },
   heading: {
     alignSelf:'center',
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     textDecoration: 'underline',
     color: 'green'
   },
   gameTitle: {
     fontWeight: 'bold',
-    fontSize: 19,
+    fontSize: 18,
     textDecoration: 'underline',
     textDecorationColor: 'gray'
   },
   teamTitle: {
     fontWeight: 'semibold',
-    fontSize: 18,
+    fontSize: 16,
   },
   playerContainer: {
 
   },
   player: {
     fontWeight: 'normal',
-    fontSize: 17,
+    fontSize: 13,
   }
 });
 
@@ -60,9 +60,9 @@ function PdfDocument( { games } ){
             const playersContent = team.players.map( player =>{
                 return (
                     <Text key={ player.id } style={styles.player}> {""}
-                        {" ".repeat(15) + "--" } { player.name } 
-                        { " ".repeat(4) + "--" } { player.email } 
-                        { " ".repeat(4) + "--" } { player.batch } 
+                        {" ".repeat(10) + "--" } { player.name } 
+                        { " ".repeat(3) + "--" } { player.email } 
+                        { " ".repeat(3) + "--" } { player.batch } 
                     </Text>
                 );
             })
@@ -70,7 +70,7 @@ function PdfDocument( { games } ){
                 <p>
                     <Text key={team.id} style={ styles.teamTitle }> {" ".repeat(3) + "* "} { team.name } </Text>
                         { playersContent }
-                    <Text>{"\n\n"}</Text>
+                    <Text> { " "  } </Text>
                 </p>
             )
         });
@@ -78,9 +78,7 @@ function PdfDocument( { games } ){
         return ( 
             <>
                 <Text key={game.id} style={ styles.gameTitle } > {"# "} {game.name} </Text> 
-                <Text> { "\n" } </Text>
                 { teamContent }
-                <Text>{"\n\n"}</Text>
             </>
         );
     })
@@ -117,8 +115,8 @@ export default function PdfOfRegistrations(){
         setIsLoading(true);
         api.getGames().then( res => res.json() )
         .then( data => {
-            setGames(data.results);
-            // console.log("games: ", data.results);
+            setGames(data);
+            // console.log("games: ", data);
             setIsLoading(false);
         })
         .catch( err=>{
@@ -131,8 +129,8 @@ export default function PdfOfRegistrations(){
     //     setIsLoading(true);
     //     api.getTeams().then( res => res.json() )
     //     .then( data => {
-    //         setTeams(data.results);
-    //         // console.log("TEAMS: ", data.results);
+    //         setTeams(data);
+    //         // console.log("TEAMS: ", data);
     //         setIsLoading(false);
 
     //     })
