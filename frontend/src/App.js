@@ -12,7 +12,7 @@ function App() {
 
   return (
     <FecthProvider>
-      <div>
+      <div className='dark'>
         <BasicRoutes />
         <ToastContainer />
       </div>

@@ -3,6 +3,7 @@
 import daisyui from 'daisyui'
 
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],

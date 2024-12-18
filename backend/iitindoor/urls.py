@@ -15,7 +15,7 @@ rest_framework.__author__ = "Indoor"
 urlpatterns = [
     path('admin/', admin.site.urls, name = "admin" ),
     path(r'', home, name = "home" ),
-    path(r'<slug:url_suffix>', home, name = "home" ),  # match everything
+    path(r'<slug:react_router>', home, name = "home" ),  # match everything
     path('api/', include("api.urls") ),
 ]
 

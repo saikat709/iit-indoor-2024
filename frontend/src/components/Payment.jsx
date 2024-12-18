@@ -20,12 +20,12 @@ export default function Payment( { isLoading, onNext } ){
                 className="select input form-control"
                 onChange={ e =>{
                     setPaymentMethod(e.target.value);
-                    setPayOffline(e.target.value === "Offline" );
+                    setPayOffline(e.target.value === "offline" );
                 }}>
                 <option value={"notselected"} disabled>Select a payment method</option>
                 { paymentMethodOptions }
-                { paymentMethod.toString() }
             </select>
+            {/* { paymentMethod.toString() } */}
 
             { !payOffline && <>
                 <h1 className="text-md font-bold text-black">Send Money (Personal):</h1>
@@ -48,7 +48,7 @@ export default function Payment( { isLoading, onNext } ){
             </>
             }
             { payOffline && <>
-                <h1 className="text-sm font-bold text-black mt-1">Contatc Any of these volunteers: </h1>
+                <h1 className="text-sm font-bold text-black mt-1">Contact any of these volunteers: </h1>
                 <hr/>
                 <h3 className="text-md font-bold text-black">Naim: <span className="px-2 text-green-400">01602676313</span> </h3>
                 <h3 className="text-md font-bold text-black">Parvej: <span className="px-2 text-green-400">01771028724</span> </h3>
@@ -62,7 +62,7 @@ export default function Payment( { isLoading, onNext } ){
                     <input type="checkbox"  className="checkbox mt-0" checked={payOffline}
                             onChange={ e=>{
                                 setPayOffline(!payOffline);
-                                if( !payOffline ) setPaymentMethod("Offline");
+                                if( !payOffline ) setPaymentMethod("offline");
                                 else setPaymentMethod("");
                             } } 
                             />

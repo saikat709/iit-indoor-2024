@@ -101,7 +101,7 @@ export default function Register(){
 
 
     const content = (
-        <div className="card m-4 mt-16 md:mt-10 w- md:m-6 flex justify-center items-center bg-slate-100">
+        <div className="card m-4 mt-16 md:mt-10 md:m-6 flex justify-center items-center bg-slate-100">
             <div className="flex justify-center">
                 <figure className="hidden md:block">
                     <img
@@ -176,7 +176,7 @@ export default function Register(){
     );
 
     return (
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col object-fit mb-10">
             <div className="flex justify-center items-center  w-4/5 md:w-3/5 h-96">
                 { isLoading ?  <Loader/> : content }
             </div>
