@@ -7,6 +7,7 @@ export default function RegistrationLookUp(){
     const api = useFetch();
     const [ isLoading, setIsLoading ] = useState(false);
     const [ allReg, setAllReg ] = useState([]);
+    const [ allGames, setAllGames ] = useState([]);
     // const [ myRecentTeam, setMyRecentTeam ] = useState(null);
 
     useEffect( ()=>{
@@ -16,6 +17,20 @@ export default function RegistrationLookUp(){
         .then( data => {
             setAllReg(data);
             setIsLoading(false);
+            // console.log("Reg: ", data);
+        })
+        .catch( err => {
+            alert(err);
+            setIsLoading(false);
+        })
+
+        setIsLoading(true);
+        api.getGames()
+        .then( res => res.json() )
+        .then( data => {
+            setAllGames(data);
+            setIsLoading(false);
+            // console.log("Games: ", data);
         })
         .catch( err => {
             alert(err);
@@ -25,10 +40,16 @@ export default function RegistrationLookUp(){
 
     const reg = allReg && allReg.map( reg => {
         // console.log(reg.status);
+        const game = allGames.filter( g => g.id == reg.team.game )[0];
+        console.log("game: ", game);
         return (reg.status === 'pending') 
-            ? <RegistrationCard key={reg.id} reg={reg} onAcceptOrRemove={ ()=>{
-                setAllReg(allReg.filter( el => el.id != reg.id ));
-            }} /> 
+            ? <RegistrationCard key={reg.id} 
+                            reg={ reg } 
+                            game={ game }
+                            onAcceptOrRemove={ ()=>{
+                                setAllReg(allReg.filter( el => el.id != reg.id ));
+                            }} 
+                    /> 
             : null 
     });
 

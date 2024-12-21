@@ -8,16 +8,17 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FecthProvider } from './context/hooks/usefetch';
 
-function App() {
+function App(){
 
   return (
     <FecthProvider>
-      <div className='dark'>
+      <div className='dark bg-gray-800'>
         <BasicRoutes />
         <ToastContainer />
       </div>
     </FecthProvider>
   );
+
 }
 
 export default App;

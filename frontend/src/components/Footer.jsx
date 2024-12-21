@@ -2,7 +2,7 @@ export default function Footer(){
 
     return (
     <>
-        <footer className="w-full flex-col md:flex-row flex justify-center items-center gap-1 p-3 py-6 text-md bg-base-300 text-slate-100 font-bold">
+        <footer className="w-full flex-col md:flex-row flex justify-center items-center gap-1 p-3 py-6 text-md bg-gray-700 text-slate-100 font-bold">
             <code className="flex flex-col justify-center items-center">
                 <p>Make this website better! </p> <a href="https://www.github.com/saikat709/iit-indoor-2024" target="_blank" className="text-primary underline block">Contribute</a>
                 <p>Suggetions for me - </p> <a href="mailto:bsse1629@iit.du.ac.bd" className="text-primary underline block">bsse1629@iit.du.ac.bd</a>

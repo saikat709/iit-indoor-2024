@@ -5,7 +5,7 @@ import Loader from "./Loader";
 
 /*{ regId, tranId }*/
 
-export default function RegistrationCard( { reg, onAcceptOrRemove } ){
+export default function RegistrationCard( { reg, onAcceptOrRemove, game } ){
     const api = useFetch();
     const [ declineMsg, setDeclineMsg ] = useState("");
     const [ isAccepting, setIsAccepting ] = useState(false);
@@ -73,7 +73,7 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
         <dialog id={"decline_registration_modal_"+reg.id} className="modal">
             <div className="modal-box">
                 <h3 className="font-bold text-lg nd:text-2xl mb-2">Are you sure to decline?</h3>
-                <input className="input border-b-2 border-white w-full" 
+                <input className="input border-b-2 border-white w-full text-gray-100 bg-gray-800" 
                         placeholder="Enter your decline message.."
                         value={ declineMsg }
                         onChange={ e=>{setDeclineMsg(e.target.value)} }
@@ -93,9 +93,10 @@ export default function RegistrationCard( { reg, onAcceptOrRemove } ){
 
     return (
         <div className="card bg-neutral text-neutral-content mx-2">
-            <div className="card-body items-center text-center">
-                <h2 className="card-title text-success">{reg.team.name}</h2>
-                <h3>{ reg.team.number }</h3>
+            <div className="relative card-body items-center text-center">
+                <h1 className="absolute top-0 right-0 bg-slate-200 text-base-200 px-2 py-1 rounded-tr-lg">{ game && game.name }</h1>
+                <h2 className="card-title text-success">{ reg.team.name }</h2>
+                <h3>Phn: { reg.team.number }</h3>
                 <hr className="w-3/4"/>
                 <h3 className="text-sm"> Payment Method: <span className="text-amber-800 font-bold text-md">{ reg.team.payment_method.toUpperCase() }</span></h3>
                 { reg.transaction_id && <p className="text-md text-pretty">Transaction Id : <span className="text-white font-mono font-bold text-lg"> { reg.transaction_id } </span> </p> }

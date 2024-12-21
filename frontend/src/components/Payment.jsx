@@ -17,12 +17,12 @@ export default function Payment( { isLoading, onNext } ){
         { !completed &&  <div className="flex flex-col justify-center gap-1">
             <p className="font-bold text-black">Method: </p>
             <select value={ paymentMethod || "notselected" }
-                className="select input form-control"
+                className="select input form-control items-center justify-center"
                 onChange={ e =>{
                     setPaymentMethod(e.target.value);
                     setPayOffline(e.target.value === "offline" );
                 }}>
-                <option value={"notselected"} disabled>Select a payment method</option>
+                <option value={"notselected"} disabled>Select payment method</option>
                 { paymentMethodOptions }
             </select>
             {/* { paymentMethod.toString() } */}

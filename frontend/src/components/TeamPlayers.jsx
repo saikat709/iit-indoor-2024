@@ -36,7 +36,7 @@ function Player( { onPlayerAdd } ){
                 setEmail("");
             }}
             >
-            <label className="input input-bordered flex items-center gap-2">
+            <label className="input input-bordered flex items-center gap-2 text-gray-50 bg-gray-800">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -56,7 +56,7 @@ function Player( { onPlayerAdd } ){
             </label>
             
             <select required 
-                    className="select select-bordered w-full max-w-xs" 
+                    className="select select-bordered w-full max-w-xs text-gray-50 bg-gray-800" 
                     value={ batch == "" ? "notselected" : batch }
                     onChange={ e => {
                         setBatch(e.target.value);
@@ -66,7 +66,7 @@ function Player( { onPlayerAdd } ){
                     { batchOptions }
             </select>
 
-            <label className="input input-bordered flex items-center gap-2">
+            <label className="input input-bordered flex items-center gap-2 text-gray-50 bg-gray-800">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"

@@ -108,7 +108,7 @@ export default function NotifyTeamMembers({ games } ){
                         <span className="text-lg">All Individual Member</span>
                         <input onChange={ ()=> { setToAll(true); } } type="checkbox" radioGroup='mail_to_type' checked={toAll} className="checkbox" />
                     </label>
-                    <label className="label cursor-pointer pb-1 mb-0">
+                    <label className="label cursor-pointer pb-1 mb-0 text-white bg-gray-800">
                         <span className="text-lg">Send to members of a game</span>
                         <input onChange={ (e)=>{ setIsforGame( !isForGame ); }}
                             type="checkbox"  

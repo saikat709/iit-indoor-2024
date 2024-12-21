@@ -91,7 +91,7 @@ export default function Moderator(){
                 <h3 className="font-bold text-xl">Are you a moderator of this site?</h3>
                 <p className="py-4">Please enter the secret key given to you.</p>
                 <input type="password" 
-                       className="input w-full form-control from-cyan-200 border-2 border-gray-300" 
+                       className="input w-full form-control from-cyan-200 border-2 border-gray-300 text-gray-50 bg-gray-800" 
                        value={secretKey} placeholder="Secret key"
                        onChange={ e => setSecretkey(e.target.value) }
                        />

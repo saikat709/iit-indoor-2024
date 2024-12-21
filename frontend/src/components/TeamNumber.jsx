@@ -17,7 +17,7 @@ export default function TeamNumber( { emails, onNext } ){
                     onNext(number);
                     setCompleted(true);
                 }}>
-                <label className="input input-bordered flex items-center gap-2">
+                <label className="input input-bordered flex items-center gap-2 text-gray-100 bg-gray-800">
                     {/* <select type="text" className="grow w-56 bg-transparent" placeholder="Email" 
                         onChange={ value => setTeamEmail(value) }
                         >

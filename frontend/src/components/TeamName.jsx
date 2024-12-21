@@ -18,10 +18,10 @@ export default function TeamName({ onNext, playerName }){
             <h1 className="text-lg font-bold">A Team name..</h1>
             <h4 className="mb-3">Not important for single player.</h4>
 
-            <label className="input input-bordered flex items-center gap-3">
+            <label className="input input-bordered flex items-center gap-3 text-gray-50 bg-gray-800">
                 {/* <img src={ process.env.PUBLIC_URL +"/images/group.png"} alt="img leader " className="h-5 w-5" /> */}
                 
-                <input type="text" className="grow text-white" placeholder="Team Name.." 
+                <input type="text" className="grow text-gray-100 bg-gray-800" placeholder="Team Name.." 
                        value={teamName} 
                        onChange={ e=>{ setTeamName(e.target.value)} } 
                     />

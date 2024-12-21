@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 
 export default function BasicLayout(){
     const curLocation = useLocation();
-
     return (
         <div className="flex min-h-screen justify-between items-center flex-col">
             <Header curPath={curLocation.pathname} />
