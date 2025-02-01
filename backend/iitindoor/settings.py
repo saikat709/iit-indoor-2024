@@ -32,7 +32,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -54,13 +55,12 @@ CORS_ALLOW_METHODS = (
 ALLOWED_HOSTS = [ '*' ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://iitindoor.pythonanywhere.com",
     "http://localhost:3000",
-    "http://localhost:8080",
     "http://127.0.0.1:9000",
 ]
 
@@ -120,12 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100
-}
-
-
 # Internationalization
 
 LANGUAGE_CODE = 'en-us'
@@ -154,8 +148,9 @@ MEDIAFILES_DIRS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-     'DEFAULT_PERMISSION_CLASSES': [
+    'PAGE_SIZE': 50,
+    'DEFAULT_RENDERER_CLASSES': ("rest_framework.renderers.JSONRenderer",), # ( "rest_framework.renderers.BrowsableAPIRenderer" )
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -167,7 +162,6 @@ REST_FRAMEWORK = {
 ROOT_URLCONF = 'iitindoor.urls'
 LOGIN_URL = '/login/'
 
-
 # Email settings
 IIT_MAIL_PASS_KEY = "gtng znme rlsa eith"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -177,7 +171,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bsse1629@iit.du.ac.bd'
 EMAIL_HOST_PASSWORD = IIT_MAIL_PASS_KEY
 DEFAULT_FROM_EMAIL = 'bsse1629@iit.du.ac.bd'
-
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
