@@ -1,5 +1,5 @@
-![Header styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/main/assets_for_readme/title.png)
-# IIT-Indoor-2024
+![Header styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/title.png)
+# # IIT-Indoor-2024
 ##### Temporarily available at: https://iitindoor.pythonanywhere.com/moderator
 
 ## Overview
@@ -74,13 +74,13 @@ Build the project and copy the generated index.html file in templates directory,
 ## Screenshots
 Below are some screenshots of the application:
 
-![Header styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/main/assets_for_readme/header.png)
+![Header styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/header.png)
 
-![moderator styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/main/assets_for_readme/moderator.png)
+![moderator styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/moderator.png)
 
-![Notification using email](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/main/assets_for_readme/notify.png)
+![Notification using email](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/notify.png)
 
-![About section](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/main/assets_for_readme/about.png)
+![About section](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/about.png)
 
 ## Deployment
 ### Using Gunicorn & Nginx (For Production)
