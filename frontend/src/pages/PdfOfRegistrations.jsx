@@ -1,4 +1,3 @@
-
 import  { Document, Page, Text, View, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
@@ -13,8 +12,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   section: {
-    margin: 25,
-    padding: 25,
+    margin: 18,
+    padding: 18,
     paddingTop: 10,
     marginTop: 10,
     flexGrow: 1
@@ -24,24 +23,28 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textDecoration: 'underline',
-    color: 'green'
+    color: '#01010F',
+    marginBottom: 12,
   },
   gameTitle: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
     textDecoration: 'underline',
-    textDecorationColor: 'gray'
+    textDecorationColor: 'gray',
+    marginBottom: 8,
   },
   teamTitle: {
     fontWeight: 'semibold',
-    fontSize: 16,
+    fontSize: 13,
+    display: 'flex',
+    gap: '1rem',
   },
   playerContainer: {
 
   },
   player: {
     fontWeight: 'normal',
-    fontSize: 13,
+    fontSize: 12,
   }
 });
 
@@ -53,13 +56,13 @@ function PdfDocument( { games } ){
 
     const pdfContent = games.map( game => {
 
-        const teamContent = game.teams.map( team => {
+        const teamContent = game.teams.map( ( team, ind ) => {
 
-            if ( team.status != 'accepted' ) return null;
+            const isAccepted = team.status == 'accepted' ;
 
             const playersContent = team.players.map( player =>{
                 return (
-                    <Text key={ player.id } style={styles.player}> {""}
+                    <Text key={ player.id } style={styles.player}> {" "}
                         {" ".repeat(10) + "--" } { player.name } 
                         { " ".repeat(3) + "--" } { player.email } 
                         { " ".repeat(3) + "--" } { player.batch } 
@@ -67,19 +70,36 @@ function PdfDocument( { games } ){
                 );
             })
             return ( 
-                <p>
-                    <Text key={team.id} style={ styles.teamTitle }> {" ".repeat(3) + "* "} { team.name } </Text>
+                <p style={{
+                    marginBottom: 10,
+                }}>
+                    <Text key={team.id} style={{
+                        ...styles.teamTitle,
+                        color: isAccepted ? 'green' : 'red',
+                    }}> {" ".repeat(3) + `${ind+1}* `} { team.name || "(No Name Provided)" } {" -> "} { team.number } </Text>
                         { playersContent }
-                    <Text> { " "  } </Text>
                 </p>
             )
         });
 
         return ( 
-            <>
-                <Text key={game.id} style={ styles.gameTitle } > {"# "} {game.name} </Text> 
+            <div key={game.id} >
+                <Text style={ styles.gameTitle } >
+                    {"# "} {game.name}  {" "}
+                    (<View style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}>
+                        <Text style={{color:'green'}}> { game.teams.filter( t => t.status == 'accepted').length } </Text> 
+                        <Text> + </Text>
+                        <Text style={{color:'red'}}>{ game.teams.filter( t => t.status != 'accepted').length } </Text>
+                        <Text> = </Text>
+                        <Text style={{color:'black'}}> { game.teams.length } </Text>
+                    </View>
+                    )
+                </Text> 
                 { teamContent }
-            </>
+            </div>
         );
     })
 
@@ -91,8 +111,17 @@ function PdfDocument( { games } ){
                 title='Team Registration Report'
                 >
             <Page size="A4" style={styles.page}>
-                <Text style={styles.heading}
-                >Teams{" "} </Text>
+                <Text style={styles.heading}>Teams{" "} </Text>
+                <Text style={{
+                    fontSize: 12,
+                    color: 'green',
+                    alignSelf:'center',
+                }}> Green is complete Registration. </Text>
+                <Text style={{
+                    fontSize: 12,
+                    color: 'red',
+                    alignSelf:'center',
+                }}> Red is pending Registration. </Text>
                 <View style={styles.section}>
                     { pdfContent }
                 </View>

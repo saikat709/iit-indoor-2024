@@ -24,7 +24,7 @@ export default function GamesList(){
     }, []);
     
     
-    const gameComponent = (game)=>{
+    const gameComponent = ( game, timeUp = false )=>{
         const verified_teams = game.teams.filter( t => t.status === 'accepted' );
         return (
             <div key={game.id} className="card bg-gray-800 text-gray-50 w-80 transition-all shadow-md hover:shadow-sm hover:shadow-amber-700 shadow-red-100 p-0 hover:bg-base-700 m-3">
@@ -68,9 +68,12 @@ export default function GamesList(){
                                 > Register </Link>
                             : <button className="btn btn-success mt-2 px-5 btn-sm">Teams complete.</button>
                        } */}
-                       <Link to={`/register/${game.id}`} 
-                            className="btn btn-primary hover:bg-blue-700 hover:border-none hover:text-white"
-                        > Register </Link>
+                       { !timeUp ?
+                           <Link to={`/register/${game.id}`} 
+                                className="btn btn-primary hover:bg-blue-700 hover:border-none hover:text-white"
+                            > Register </Link>
+                            : <button className="btn bg-blue-950 hover:bg-red-950 hover:border-none hover:text-white/80 text-white"> Reg. Time Ended </button>
+                       }
                     </div>
                 </div>
             </div>
@@ -88,9 +91,9 @@ export default function GamesList(){
                 <h1 className="text-xl w-full text-start text-slate-100 font-bold">Valorant Tournament: </h1>
                 <div className="h-px bg-slate-100 w-full"/>
                     <div className="flex justify-center flex-row items-center flex-wrap p-1 md:p-2 mt-6 md:mt-2 mb-5">
-                    { games && games.map( (el) => el.total_team === 999 ? gameComponent(el) : null ) }
+                    { games && games.map( (el) => el.total_team === 999 ? gameComponent(el, true) : null ) }
                 </div>
-                <h1 className="text-xl w-full text-start text-slate-100 font-bold">Competitive games: ({ games ? games.filter( (el) => el.entry_fee > 0 ).length : 0 }) </h1>
+                <h1 className="text-xl w-full text-start text-slate-100 font-bold">Competitive games: ({ games ? games.filter( (el) => el.entry_fee > 0 ).length - 1 : 0 }) </h1>
                 <div className="h-px bg-slate-100 w-full"/>
                     <div className="flex justify-center flex-row items-center flex-wrap p-1 md:p-2 mt-6 md:mt-2 mb-5">
                     { games && games.map( (el) => el.entry_fee > 0 && el.total_team !== 999 ? gameComponent(el) : null ) }

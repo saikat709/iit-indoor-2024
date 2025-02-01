@@ -16,7 +16,8 @@ export default function TeamName({ onNext, playerName }){
         { !completed &&  <div className="flex flex-col justify-center gap-2 text-black">
 
             <h1 className="text-lg font-bold">A Team name..</h1>
-            <h4 className="mb-3">Not important for single player.</h4>
+            <h4 className="mb-1">Not important for single player.</h4>
+            <h5 className="md-3"> If you dont have a name, leave it as it is. Do it Make it empty.</h5>
 
             <label className="input input-bordered flex items-center gap-3 text-gray-50 bg-gray-800">
                 {/* <img src={ process.env.PUBLIC_URL +"/images/group.png"} alt="img leader " className="h-5 w-5" /> */}
@@ -28,6 +29,7 @@ export default function TeamName({ onNext, playerName }){
             </label>
             <div className="flex justify-end"> 
                 <button className="btn btn-primary mt-2"
+                        disabled={ !teamName }
                         onClick={ ()=>{
                             onNext(teamName);
                             setCompleted(true);

@@ -10,9 +10,9 @@ function TeamCard( { team, showStatus = false } ){
     });
 
     return (
-        <div className="card bg-gray-800 text-gray-100 w-80 "
+        <div className="card bg-gray-700 text-gray-200 w-80 "
             onClick={ ()=>{ /*toast("Let us know if you need information about it.", { toastId: "team_info"} ) */} }
-        >
+            >
             <div className="card-body relative items-center text-center">
                 { showStatus && <h1 className={ "absolute right-0 top-0 rounded-full text-sm px-2 py-1 text-black " + 
                     ( team.status === 'accepted' ? " bg-success" : ( team.status === 'pending' ? " bg-warning" : " bg-error") ) }
@@ -84,13 +84,13 @@ export default function Teams(){
         });
     }
 
-    const getTeamsByGame = ()=>{
+    const getTeamsByGame = () => {
         return allGames.map( game => {
             return (
                 <div className="flex flex-col justify-start mb-2 gap-1">
                     <h1>Game: {game.name} ({game.teams.length}) - <span className="text-success">{game.teams.filter(t => t.status === 'accepted').length}</span> / <span className="text-warning">{game.teams.filter(t => t.status !== 'accepted').length}</span> </h1>
                     <hr/>
-                    <div className="grid grid-cols-1 md:grid-cols-1 gap-2"> {getTeamsOfGame(game)} </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2"> {getTeamsOfGame(game)} </div>
                     { game.teams.length === 0 && <h1 className=" text-zinc-300 ps-2 text-xs">No Teams Found For this game.</h1> }
                 </div>
             );

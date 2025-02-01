@@ -6,13 +6,19 @@ function Player( { onPlayerAdd } ){
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
 
-    const batches = [...Array(16).keys() ].map((x)=>{
+    const batches1 = [ ...Array(16).keys() ].map((x)=>{
         const ind = ++x;
         const indStr = ind.toString().padStart(2, "0");
         return [ "bsse" + indStr, "BSSE" + indStr ];
     });
 
-    const batchOptions = batches.map( batch => {
+    const batches2 = [ ...Array(11).keys() ].map((x)=>{
+        const ind = ++x;
+        const indStr = ind.toString().padStart(2, "0");
+        return [ "msse" + indStr, "MSSE" + indStr ];
+    });
+
+    const batchOptions = [...batches1, ...batches2].map( batch => {
         return ( 
             <option key={batch[0]} value={batch[0]} 
                 onChange={ (e)=> { 
