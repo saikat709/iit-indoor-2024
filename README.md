@@ -1,6 +1,6 @@
 ![Header styles](https://raw.githubusercontent.com/saikat709/iit-indoor-2024/refs/heads/main/assets_for_meadme/title.png)
 # # IIT-Indoor-2024
-##### Temporarily available at: https://iitindoor.pythonanywhere.com/moderator
+##### Temporarily available at: https://iitindoor.pythonanywhere.com/
 
 ## Overview
 **IIT-Indoor-2024** is a web application developed using **Django** for the backend and **React** for the frontend. The frontend is built separately in the `frontend` folder but is served through Django's routing system at `/` (home). The project aims to provide an efficient and user-friendly interface for managing indoor facilities at IIT.
